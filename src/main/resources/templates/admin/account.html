@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin account</title>
+</head>
+<body>
+<div>Контакты человека:</div>
+<a th:text="${admin.toString()}"></a>
+<div>Баланс: </div>
+<a th:text="${account.getBalance()}"> </a>
+<div>Роль: </div>
+<a th:text="${account.getRole()}"></a>
+
+<a href="/admin/checkForm">Поиск операций пользователя</a>
+<a href="/admin/users">Все пользователи</a>
+</body>
+</html>

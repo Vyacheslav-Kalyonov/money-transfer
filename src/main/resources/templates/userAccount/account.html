@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Account check</title>
+</head>
+<body>
+<div>Контакты человека:</div>
+<a th:text="${user.toString()}"></a>
+<div>Баланс: </div>
+<a th:text="${account.getBalance()}"> </a>
+<div>Роль: </div>
+<a th:text="${account.getRole()}"></a>
+</body>
+</html>

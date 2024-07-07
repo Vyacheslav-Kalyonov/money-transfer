@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>Данные пользователя: </div>
+
+
+<form th:action="@{/user/account/transfer}" th:object="${action}" th:method="POST">
+    <label for="accountId">Введите ID аккаунта, кому хотите перевести деньги:</label><br>
+    <input type="text" th:field="*{addressee}" id="accountId" name="id">
+
+    <label for="amount">Введите сумму перевода:</label><br>
+    <input type="text" th:field="*{amount}" id="amount" name="amount"><br><br>
+    <button type="submit">Перевести</button>
+
+</form>
+</body>
+</html>

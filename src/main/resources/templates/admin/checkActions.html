@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>Действия пользователя:</h2>
+<ul>
+    <li th:each="action : ${user.getActions()}">
+        <span th:text="${action.toString()}"></span>
+    </li>
+</ul>
+
+<a href="/admin/account/3">Админ аккаунт</a>
+</body>
+</html>
