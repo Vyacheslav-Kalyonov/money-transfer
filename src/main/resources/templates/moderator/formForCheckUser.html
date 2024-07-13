@@ -5,7 +5,8 @@
     <title>Title</title>
 </head>
 <body>
-<form th:action="@{/user/account/getUser}" th:object="${account}" th:method="POST">
+<h2>Поиск действий пользователя по ID</h2>
+<form th:action="@{/moderator/search/{idFrom}(idFrom=${idFrom.toString()})}" th:object="${account}" th:method="POST">
     <label for="accountId">Введите ID аккаунта:</label><br>
     <input type="text" th:field="*{id}" id="accountId" name="id"><br><br>
     <button type="submit">Найти</button>

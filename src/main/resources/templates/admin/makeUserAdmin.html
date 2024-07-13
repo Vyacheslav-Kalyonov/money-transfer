@@ -5,12 +5,10 @@
     <title>Title</title>
 </head>
 <body>
-<h2>Поиск действий пользователя по ID</h2>
-<form th:action="@{/admin/search}" th:object="${account}" th:method="POST">
+<form th:action="@{/admin/setAdmin/{idFrom}(idFrom=${idFrom.toString()})}" th:object="${account}" th:method="POST">
     <label for="accountId">Введите ID аккаунта:</label><br>
     <input type="text" th:field="*{id}" id="accountId" name="id"><br><br>
-    <button type="submit">Найти</button>
+    <button type="submit">Сделать модератором</button>
 </form>
-
 </body>
 </html>

@@ -6,10 +6,15 @@
 </head>
 <body>
 <div>Контакты человека:</div>
-<a th:text="${user.toString()}"></a>
+<a th:text="${'name : ' + user.getName() + ', surname : ' + user.getSurname() + ', mail' + user.getMail()}"></a>
 <div>Баланс: </div>
 <a th:text="${account.getBalance()}"> </a>
-<div>Роль: </div>
-<a th:text="${account.getRole()}"></a>
+<br/>
+<div>Id аккаунта</div>
+<a th:text="${'account id : ' + account.getId()}"></a>
+<br/>
+<a th:href="@{/user/account/selectedUser/{id}(id=${account.getId()})}">Перевести деньги</a>
+<br/>
+<a th:href="@{/user/account/add-money/{id}(id=${account.getId()})}">Пополнить счет</a>
 </body>
 </html>

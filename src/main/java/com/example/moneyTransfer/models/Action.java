@@ -16,7 +16,6 @@ public class Action {
     @Column(name = "id")
     private Integer id;
 
-    // TODO сделать enumerated поле (пока оставлю текст)
     @Column(name = "type_action")
     private String typeAction;
 
@@ -28,23 +27,28 @@ public class Action {
     private BigDecimal amount;
 
     @Column(name = "date")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date date;
 
 
-    @ManyToOne()
-    @JoinColumn(name = "adressee", referencedColumnName = "id")
+    @ManyToOne
+    @JoinColumn(name = "addressee", referencedColumnName = "id")
     private Account addressee;
+
+    public void transfer() {
+        this.setDate(new Date());
+        this.setTypeAction(TypeActionEnum.TRANSFER.name());
+    }
+
+    public void addMoney(Account account) {
+        this.setDate(new Date());
+        this.setTypeAction(TypeActionEnum.ADD.name());
+        this.setAccount(account);
+        this.setAddressee(account);
+    }
 
     @Override
     public String toString() {
-        return "Сумма: " + amount + "\nДата: " + date + "\nОперация: " + typeAction + "\nАдресат: " + addressee;
-    }
-
-    public void transfer(Account account, Account accountForTransfer, BigDecimal amount) {
-        this.setAccount(account);
-        this.setAddressee(accountForTransfer);
-        this.setAmount(amount);
-        this.setDate(new Date());
-        this.setTypeAction("transfer");
+        return "";
     }
 }

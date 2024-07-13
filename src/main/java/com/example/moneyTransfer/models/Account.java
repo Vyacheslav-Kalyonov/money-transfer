@@ -33,4 +33,9 @@ public class Account {
 
     @OneToMany(mappedBy = "account")
     private List<Action> actions;
+
+    @Override
+    public String toString() {
+        return "1";
+    }
 }

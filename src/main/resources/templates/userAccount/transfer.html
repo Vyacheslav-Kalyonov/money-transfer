@@ -7,11 +7,11 @@
 <body>
 <div>Данные пользователя: </div>
 
+<form th:action="@{/user/account/transfer/{id}(id=${accountFrom.getId()})}" th:object="${action}" th:method="POST">
 
-<form th:action="@{/user/account/transfer}" th:object="${action}" th:method="POST">
     <label for="accountId">Введите ID аккаунта, кому хотите перевести деньги:</label><br>
     <input type="text" th:field="*{addressee}" id="accountId" name="id">
-
+    <br/>
     <label for="amount">Введите сумму перевода:</label><br>
     <input type="text" th:field="*{amount}" id="amount" name="amount"><br><br>
     <button type="submit">Перевести</button>

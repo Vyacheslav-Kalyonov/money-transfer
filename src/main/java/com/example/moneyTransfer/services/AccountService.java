@@ -1,6 +1,7 @@
 package com.example.moneyTransfer.services;
 
 import com.example.moneyTransfer.models.Account;
+import com.example.moneyTransfer.models.Action;
 import com.example.moneyTransfer.repositories.AccountRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ public class AccountService {
         this.accountRepository = accountRepository;
     }
 
+    @Transactional
     public Account findAccount(Integer id) {
         return accountRepository.findById(id).orElse(null);
     }
@@ -37,9 +39,15 @@ public class AccountService {
     }
 
     @Transactional
-    public void transfer(Account account, Integer idAddressee, BigDecimal amount) {
-        account.setBalance(account.getBalance().subtract(amount));
-        accountRepository.addAmountById(idAddressee, amount);
+    public void transfer(Action action) {
+        Account account = action.getAccount();
+        account.setBalance(account.getBalance().subtract(action.getAmount()));
+        accountRepository.addAmountById(action.getAddressee().getId(), action.getAmount());
         accountRepository.save(account);
+    }
+
+    @Transactional
+    public void addMoney(Integer id, BigDecimal amount) {
+        accountRepository.addAmountById(id, amount);
     }
 }

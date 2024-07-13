@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add money</title>
+</head>
+<body>
+<form th:action="@{/user/account/add-money/{id}(id=${account.getId()})}" th:object="${action}" th:method="POST">
+
+    <label for="amount">Введите сумму пополнения:</label><br/>
+    <input type="text" th:field="*{amount}" id="amount" name="amount"><br/>
+    <button type="submit">Пополнить</button>
+
+</form>
+</body>
+</html>

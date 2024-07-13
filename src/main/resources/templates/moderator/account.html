@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin account</title>
+</head>
+<body>
+<div>Владелец:</div>
+<a th:text="${'name : ' + moderator.getName() + ', surname : ' + moderator.getSurname() + ', mail : ' + moderator.getMail()}"></a>
+
+<div>Логин: </div>
+<a th:text="${account.getLogin()}"></a>
+<br/>
+<a th:href="@{/moderator/checkForm/{id}(id=${account.getId()})}">Посмотреть действия пользователя</a>
+<br/>
+<a th:href="@{/moderator/users/{id}(id=${account.getId()})}">Посмотреть список пользователей</a>
+</body>
+</html>

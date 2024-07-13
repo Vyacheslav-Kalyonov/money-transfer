@@ -8,10 +8,9 @@
 <h2>Действия пользователя:</h2>
 <ul>
     <li th:each="action : ${user.getActions()}">
-        <span th:text="${action.toString()}"></span>
+        <span th:text="${action.getAddressee().getLogin() + ', тип операции : ' + action.getTypeAction() + ', сумма : ' + action.getAmount()}"></span>
     </li>
 </ul>
 
-<a href="/admin/account/3">Админ аккаунт</a>
 </body>
 </html>

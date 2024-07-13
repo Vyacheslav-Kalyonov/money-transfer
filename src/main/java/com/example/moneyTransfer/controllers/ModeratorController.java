@@ -1,10 +1,12 @@
 package com.example.moneyTransfer.controllers;
 
+
 import com.example.moneyTransfer.exceptions.account.AccountErrorResponse;
 import com.example.moneyTransfer.models.Account;
 import com.example.moneyTransfer.models.Person;
 import com.example.moneyTransfer.modelsDTO.AdminAccountDTO;
 import com.example.moneyTransfer.modelsDTO.PersonDTO;
+import com.example.moneyTransfer.modelsDTO.UserAccountDTO;
 import com.example.moneyTransfer.services.AccountService;
 import com.example.moneyTransfer.util.Constants;
 import org.modelmapper.ModelMapper;
@@ -14,14 +16,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/admin")
-public class AdminController {
+@RequestMapping("/moderator")
+public class ModeratorController {
 
     private final AccountService accountService;
     private final ModelMapper mapper;
 
     @Autowired
-    public AdminController(AccountService accountService, ModelMapper mapper) {
+    public ModeratorController(AccountService accountService, ModelMapper mapper) {
         this.accountService = accountService;
         this.mapper = mapper;
     }
@@ -39,43 +41,37 @@ public class AdminController {
         Person person = account.getOwner();
 
         model.addAttribute("account", mapper.map(account, AdminAccountDTO.class));
-        model.addAttribute("admin", mapper.map(person, PersonDTO.class));
+        model.addAttribute("moderator", mapper.map(person, PersonDTO.class));
 
-        return "admin/account";
+        return "moderator/account";
     }
 
-    @GetMapping("/formMakeAdmin/{id}")
-    public String getFormForMakeAdmin(@PathVariable("id") Integer id,
-                                      Model model) {
-        model.addAttribute("account", new AdminAccountDTO());
+    @GetMapping("/checkForm/{id}")
+    public String getFormForCheckActions(@PathVariable("id") Integer id,
+                                         Model model) {
+        model.addAttribute("account", new UserAccountDTO());
         model.addAttribute("idFrom", id);
-        return "admin/makeUserAdmin";
+        return "moderator/formForCheckUser";
     }
 
-    @PostMapping("/setAdmin/{id}")
-    public String setAdmin(@ModelAttribute("account") AdminAccountDTO accountDTO,
-                           Model model) {
-
-        Account account = accountService.findAccount(accountDTO.getId());
-
+    @PostMapping("/search/{id}")
+    public String getActions(@ModelAttribute("account") UserAccountDTO accountSearch,
+                             Model model) {
+        Account account = accountService.findAccount(accountSearch.getId());
+        // TODO реализация логики проверки аккаунта
         if (account == null) {
             model.addAttribute("error", new AccountErrorResponse(Constants.ACCOUNT_NOT_FOUND_EXCEPTION));
             return "exception/error";
-        } else if (account.getRole().equals(Constants.MODERATOR_ROLE)) {
-            model.addAttribute("error", new AccountErrorResponse(Constants.ACCOUNT_HAS_MODERATOR_ROLE_EXCEPTION));
-            return "exception/error";
         }
 
-        account.setRole(Constants.MODERATOR_ROLE);
-        accountService.updateAccount(account);
-        model.addAttribute("moderators", accountService.findAllByRole(Constants.MODERATOR_ROLE));
-        return "admin/checkAdminsList";
+        model.addAttribute("user", account);
+        return "moderator/checkActions";
     }
 
-    @GetMapping("/checkAdmins/{id}")
-    public String getAdminsList(@PathVariable("id") Integer id,
-                                Model model) {
-        model.addAttribute("moderators", accountService.findAllByRole(Constants.MODERATOR_ROLE));
-        return "admin/checkAdminsList";
+    @GetMapping("/users/{id}")
+    public String getUsers(@PathVariable("id") Integer id,
+                           Model model) {
+        model.addAttribute("users", accountService.findAllByRole("user"));
+        return "moderator/checkAllUsers";
     }
 }

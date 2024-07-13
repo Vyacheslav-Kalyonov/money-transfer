@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>Список модераторов:</h2>
+<ul>
+    <li th:each="moderator : ${moderators}">
+        <span th:text="${'логин : ' + moderator.getLogin() + ', name : ' + moderator.getOwner().getName() + ', surname : ' + moderator.getOwner().getSurname()}"></span>
+    </li>
+</ul>
+</body>
+</html>
