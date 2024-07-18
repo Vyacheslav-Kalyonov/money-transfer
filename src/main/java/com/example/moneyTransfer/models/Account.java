@@ -1,5 +1,6 @@
 package com.example.moneyTransfer.models;
 
+import com.example.moneyTransfer.util.Constants;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.util.List;
@@ -34,8 +35,9 @@ public class Account {
     @OneToMany(mappedBy = "account")
     private List<Action> actions;
 
-    @Override
-    public String toString() {
-        return "1";
+    public void beforeSave() {
+        this.setRole(Constants.USER_ROLE);
+        this.setBalance(BigDecimal.valueOf(0.01));
+        this.setOwner(null);
     }
 }

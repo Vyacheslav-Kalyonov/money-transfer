@@ -14,5 +14,7 @@
 <a th:href="@{/moderator/checkForm/{id}(id=${account.getId()})}">Посмотреть действия пользователя</a>
 <br/>
 <a th:href="@{/moderator/users/{id}(id=${account.getId()})}">Посмотреть список пользователей</a>
+<br/>
+<a th:href="@{http://localhost:8080/person/edit/{id}(id=${account.getId()})}">Отредактировать данные о владельце аккаунта</a>
 </body>
 </html>

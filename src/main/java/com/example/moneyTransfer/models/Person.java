@@ -27,9 +27,4 @@ public class Person {
 
     @OneToMany(mappedBy = "owner")
     private List<Account> accounts;
-
-    @Override
-    public String toString() {
-        return "Name: " + name + ", Surname: " + surname + ", Phone: " + phone;
-    }
 }

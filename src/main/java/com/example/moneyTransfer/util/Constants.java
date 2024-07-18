@@ -13,4 +13,6 @@ public interface Constants {
     String ACCOUNT_HAS_MODERATOR_ROLE_EXCEPTION = "Аккаунт с таким id уже имеет роль {Модератор}";
 
     String BALANCE_EXCEPTION = "Недостаточно денег на балансе";
+    String ACCOUNT_WITH_THIS_LOGIN_EXIST = "Аккаунт с таким логином уже существует";
+    String ACCOUNT_NOF_FOUND_WITH_LOGIN = "Неправильный логин или пароль";
 }

@@ -10,5 +10,7 @@
 <a th:href="@{/admin/formMakeAdmin/{id}(id=${account.getId()})}">Назначить модератора</a>
 <br/>
 <a th:href="@{/admin/checkAdmins/{id}(id=${account.getId()})}">Посмотреть список админов</a>
+<br/>
+<a th:href="@{http://localhost:8080/person/edit/{id}(id=${account.getId()})}">Отредактировать данные о владельце аккаунта</a>
 </body>
 </html>

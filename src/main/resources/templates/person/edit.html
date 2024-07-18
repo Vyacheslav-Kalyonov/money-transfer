@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div>
+    <h2>Редактирование данных о пользователе</h2>
+    <form th:method="post" th:action="@{/person/getEdit/{id}(id=${idAccount.toString()})}" th:object="${person}">
+        <div>
+            <label for="name">Имя:</label>
+            <input type="text" th:field="*{name}" id="name" name="id"/>
+            <a style="color: red" th:if="${#fields.hasErrors('name')}" th:field="*{name}">Ошибка в имени</a>
+        </div>
+        <div>
+            <label for="surname">Surname:</label>
+            <input type="text" th:field="*{surname}" id="surname"/>
+            <a style="color: red" th:if="${#fields.hasErrors('surname')}" th:field="*{surname}">Ошибка в фамилии</a>
+        </div>
+        <div>
+            <label for="phone">Телефон:</label>
+            <input type="text" th:field="*{phone}" id="phone"/>
+            <a style="color: red" th:if="${#fields.hasErrors('phone')}" th:field="*{phone}">Ошибка в телефоне</a>
+        </div>
+        <div>
+            <label for="mail">Почта:</label>
+            <input type="email" id="mail" th:field="*{mail}"/>
+            <a style="color: red" th:if="${#fields.hasErrors('mail')}" th:field="*{mail}">Ошибка в почте</a>
+        </div>
+        <button type="submit">Сохранить изменения</button>
+    </form>
+</div>
+</body>
+</html>

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface AccountRepository extends JpaRepository<Account, Integer> {
@@ -20,4 +21,8 @@ public interface AccountRepository extends JpaRepository<Account, Integer> {
     @Transactional
     @Query("UPDATE Account e SET e.balance = e.balance + :value WHERE e.id = :id")
     void addAmountById(Integer id, BigDecimal value);
+
+    Optional<Account> findAccountByLogin(String login);
+
+    boolean existsByLogin(String login);
 }
